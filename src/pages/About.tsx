@@ -113,13 +113,23 @@ const About: React.FC = () => {
             title="Certifications"
             items={[
               {
-                title: "AWS Certified Machine Learning",
-                subtitle: "Amazon Web Services",
-                period: "2022"
+                title: "Deep Learning Specialization",
+                subtitle: "DeepLearning.AI",
+                period: "2025"
               },
               {
-                title: "TensorFlow Developer Certificate",
-                subtitle: "Google",
+                title: "Azure Data Scientist Associate",
+                subtitle: "Microsoft",
+                period: "2020"
+              },
+              {
+                title: "Microsoft Technology Associate: Introduction to Programming Using Python",
+                subtitle: "Microsoft",
+                period: "2020"
+              },
+              {
+                title: "Azure Fundamentals",
+                subtitle: "Microsoft",
                 period: "2020"
               }
             ]}
