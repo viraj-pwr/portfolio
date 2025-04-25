@@ -158,25 +158,6 @@ const Contact: React.FC = () => {
                 </div>
               </div>
             </div>
-            
-            {/* Office hours */}
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-md border border-gray-200 dark:border-gray-800">
-              <h3 className="text-lg font-semibold mb-4">Office Hours</h3>
-              <div className="space-y-2 text-gray-600 dark:text-gray-400">
-                <p className="flex justify-between">
-                  <span>Monday - Friday:</span>
-                  <span>9:00 AM - 6:00 PM IST</span>
-                </p>
-                <p className="flex justify-between">
-                  <span>Saturday:</span>
-                  <span>By appointment</span>
-                </p>
-                <p className="flex justify-between">
-                  <span>Sunday:</span>
-                  <span>Closed</span>
-                </p>
-              </div>
-            </div>
           </div>
           
           {/* Contact form */}
