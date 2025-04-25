@@ -1,47 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon, GanttChart as ChartNoAxesGantt } from 'lucide-react';
+import React, { useState } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { Menu, X, BarChart2 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import ThemeToggle from './ThemeToggle';
 
-type NavbarProps = {
-  currentPage: string;
-  navigateTo: (page: string) => void;
-};
-
-const Navbar: React.FC<NavbarProps> = ({ currentPage, navigateTo }) => {
+const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Check if page is scrolled for navbar styling
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close mobile menu when navigation occurs
-  const handleNavigation = (page: string) => {
-    navigateTo(page);
+  const handleNavigation = (path: string) => {
+    navigate(path);
     setIsMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
   };
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-md' 
-          : 'bg-transparent'
-      }`}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4 md:py-6">
           {/* Logo */}
-          <div className="flex items-center" onClick={() => handleNavigation('home')}>
+          <div className="flex items-center" onClick={() => handleNavigation('/')}>
             <div className="flex items-center space-x-2 cursor-pointer">
-              <ChartNoAxesGantt className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+              <BarChart2 className="h-6 w-6 text-blue-600 dark:text-blue-400" />
               <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Viraj Pawar
               </span>
@@ -50,113 +36,45 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, navigateTo }) => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <NavLink 
-              title="Home" 
-              isActive={currentPage === 'home'} 
-              onClick={() => handleNavigation('home')} 
-            />
-            <NavLink 
-              title="Experience" 
-              isActive={currentPage === 'experience'} 
-              onClick={() => handleNavigation('experience')} 
-            />
-            <NavLink 
-              title="Projects" 
-              isActive={currentPage === 'projects'} 
-              onClick={() => handleNavigation('projects')} 
-            />
-            <NavLink 
-              title="Blog" 
-              isActive={currentPage === 'blog'} 
-              onClick={() => handleNavigation('blog')} 
-            />
-            <NavLink 
-              title="About" 
-              isActive={currentPage === 'about'} 
-              onClick={() => handleNavigation('about')} 
-            />
-            <NavLink 
-              title="Contact" 
-              isActive={currentPage === 'contact'} 
-              onClick={() => handleNavigation('contact')} 
-            />
+            <NavLink title="Home" isActive={isActive('/')} onClick={() => handleNavigation('/')} />
+            <NavLink title="Experience" isActive={isActive('/experience')} onClick={() => handleNavigation('/experience')} />
+            <NavLink title="Projects" isActive={isActive('/projects')} onClick={() => handleNavigation('/projects')} />
+            <NavLink title="Blog" isActive={isActive('/blog')} onClick={() => handleNavigation('/blog')} />
+            <NavLink title="About" isActive={isActive('/about')} onClick={() => handleNavigation('/about')} />
+            <NavLink title="Contact" isActive={isActive('/contact')} onClick={() => handleNavigation('/contact')} />
             
             {/* Theme toggle */}
-            <button 
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? (
-                <Sun className="h-5 w-5 text-yellow-400" />
-              ) : (
-                <Moon className="h-5 w-5 text-blue-900" />
-              )}
-            </button>
+            <ThemeToggle />
           </nav>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden items-center space-x-4">
-            <button 
-              onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? (
-                <Sun className="h-5 w-5 text-yellow-400" />
-              ) : (
-                <Moon className="h-5 w-5 text-blue-900" />
-              )}
-            </button>
+          <div className="md:hidden flex items-center">
+            <ThemeToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle menu"
+              className="ml-4 p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             >
+              <span className="sr-only">Open menu</span>
               {isMenuOpen ? (
-                <X className="h-6 w-6" />
+                <X className="h-6 w-6" aria-hidden="true" />
               ) : (
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6" aria-hidden="true" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <MobileNavLink 
-              title="Home" 
-              isActive={currentPage === 'home'} 
-              onClick={() => handleNavigation('home')} 
-            />
-            <MobileNavLink 
-              title="Experience" 
-              isActive={currentPage === 'experience'} 
-              onClick={() => handleNavigation('experience')} 
-            />
-            <MobileNavLink 
-              title="Projects" 
-              isActive={currentPage === 'projects'} 
-              onClick={() => handleNavigation('projects')} 
-            />
-            <MobileNavLink 
-              title="Blog" 
-              isActive={currentPage === 'blog'} 
-              onClick={() => handleNavigation('blog')} 
-            />
-            <MobileNavLink 
-              title="About" 
-              isActive={currentPage === 'about'} 
-              onClick={() => handleNavigation('about')} 
-            />
-            <MobileNavLink 
-              title="Contact" 
-              isActive={currentPage === 'contact'} 
-              onClick={() => handleNavigation('contact')} 
-            />
+            <MobileNavLink title="Home" isActive={isActive('/')} onClick={() => handleNavigation('/')} />
+            <MobileNavLink title="Experience" isActive={isActive('/experience')} onClick={() => handleNavigation('/experience')} />
+            <MobileNavLink title="Projects" isActive={isActive('/projects')} onClick={() => handleNavigation('/projects')} />
+            <MobileNavLink title="Blog" isActive={isActive('/blog')} onClick={() => handleNavigation('/blog')} />
+            <MobileNavLink title="About" isActive={isActive('/about')} onClick={() => handleNavigation('/about')} />
+            <MobileNavLink title="Contact" isActive={isActive('/contact')} onClick={() => handleNavigation('/contact')} />
           </div>
         </div>
       )}
@@ -173,26 +91,23 @@ type NavLinkProps = {
 const NavLink: React.FC<NavLinkProps> = ({ title, isActive, onClick }) => (
   <button
     onClick={onClick}
-    className={`px-1 py-2 text-sm font-medium transition-all duration-300 relative ${
-      isActive 
-        ? 'text-blue-600 dark:text-blue-400' 
-        : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+    className={`text-sm font-medium transition-colors ${
+      isActive
+        ? 'text-blue-600 dark:text-blue-400'
+        : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
     }`}
   >
     {title}
-    {isActive && (
-      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400 transform origin-bottom"></span>
-    )}
   </button>
 );
 
 const MobileNavLink: React.FC<NavLinkProps> = ({ title, isActive, onClick }) => (
   <button
     onClick={onClick}
-    className={`block px-3 py-2 rounded-md text-base font-medium w-full text-left ${
-      isActive 
-        ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400' 
-        : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+    className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${
+      isActive
+        ? 'text-blue-600 dark:text-blue-400 bg-gray-50 dark:bg-gray-800'
+        : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800'
     }`}
   >
     {title}

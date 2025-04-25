@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import MediumIcon from './icons/MediumIcon';
 
-type FooterProps = {
-  navigateTo: (page: string) => void;
-};
+const Footer: React.FC = () => {
+  const navigate = useNavigate();
 
-const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className="bg-gray-100 dark:bg-gray-800 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,12 +33,12 @@ const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <FooterLink text="Home" onClick={() => navigateTo('home')} />
-              <FooterLink text="Experience" onClick={() => navigateTo('experience')} />
-              <FooterLink text="Projects" onClick={() => navigateTo('projects')} />
-              <FooterLink text="Blog" onClick={() => navigateTo('blog')} />
-              <FooterLink text="About" onClick={() => navigateTo('about')} />
-              <FooterLink text="Contact" onClick={() => navigateTo('contact')} />
+              <FooterLink text="Home" onClick={() => handleNavigation('/')} />
+              <FooterLink text="Experience" onClick={() => handleNavigation('/experience')} />
+              <FooterLink text="Projects" onClick={() => handleNavigation('/projects')} />
+              <FooterLink text="Blog" onClick={() => handleNavigation('/blog')} />
+              <FooterLink text="About" onClick={() => handleNavigation('/about')} />
+              <FooterLink text="Contact" onClick={() => handleNavigation('/contact')} />
             </ul>
           </div>
 
@@ -69,8 +73,8 @@ const SocialIcon: React.FC<SocialIconProps> = ({ icon, href, ariaLabel }) => (
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
     aria-label={ariaLabel}
+    className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
   >
     {icon}
   </a>

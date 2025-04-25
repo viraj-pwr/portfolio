@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { MapPin, Mail, Phone, Send, Github, Linkedin } from 'lucide-react';
 import MediumIcon from '../components/icons/MediumIcon';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
+  useEffect(() => {
+    // Initialize EmailJS with your public key
+    emailjs.init('zKTb0xXt7bo2UPPll');
+  }, []);
+
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    user_name: '',
+    user_email: '',
     subject: '',
     message: '',
   });
@@ -16,28 +23,57 @@ const Contact: React.FC = () => {
     message: string;
   } | null>(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setFormStatus({ submitted: true, success: true, message: 'Your message has been sent successfully! I will get back to you soon.' });
+    setIsSubmitting(true);
     
-    // Clear form after submission
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-    });
-    
-    // Reset form status after 5 seconds
-    setTimeout(() => {
-      setFormStatus(null);
-    }, 5000);
+    try {
+      const result = await emailjs.sendForm(
+        'service_u5bnlk4',
+        'template_950o88g',
+        formRef.current!,
+        'zKTb0xXt7bo2UPPll'
+      );
+
+      if (result.text === 'OK') {
+        setFormStatus({
+          submitted: true,
+          success: true,
+          message: 'Your message has been sent successfully! I will get back to you soon.'
+        });
+        
+        // Clear form after successful submission
+        setFormData({
+          user_name: '',
+          user_email: '',
+          subject: '',
+          message: '',
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Email sending error:', error);
+      setFormStatus({
+        submitted: true,
+        success: false,
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again later or contact me directly via email.'
+      });
+    } finally {
+      setIsSubmitting(false);
+      
+      // Reset form status after 5 seconds
+      setTimeout(() => {
+        setFormStatus(null);
+      }, 5000);
+    }
   };
 
   return (
@@ -62,23 +98,23 @@ const Contact: React.FC = () => {
                 <ContactInfoItem 
                   icon={<MapPin className="h-5 w-5" />}
                   title="Location"
-                  detail="San Francisco, California"
+                  detail="Ireland"
                 />
                 
                 <ContactInfoItem 
                   icon={<Mail className="h-5 w-5" />}
                   title="Email"
-                  detail="contact@virajpawar.com"
+                  detail="contact@databyviraj.com"
                   isLink
-                  href="mailto:contact@virajpawar.com"
+                  href="mailto:contact@databyviraj.com"
                 />
                 
                 <ContactInfoItem 
                   icon={<Phone className="h-5 w-5" />}
                   title="Phone"
-                  detail="+1 (415) 555-0123"
+                  detail="+353 832082399 / +44 7938076208"
                   isLink
-                  href="tel:+14155550123"
+                  href="tel:+353832082399"
                 />
               </div>
               
@@ -111,7 +147,7 @@ const Contact: React.FC = () => {
               <div className="space-y-2 text-gray-600 dark:text-gray-400">
                 <p className="flex justify-between">
                   <span>Monday - Friday:</span>
-                  <span>9:00 AM - 6:00 PM PST</span>
+                  <span>9:00 AM - 6:00 PM IST</span>
                 </p>
                 <p className="flex justify-between">
                   <span>Saturday:</span>
@@ -136,18 +172,18 @@ const Contact: React.FC = () => {
                 </div>
               )}
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {/* Name */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="user_name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Your Name
                     </label>
                     <input
                       type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
+                      id="user_name"
+                      name="user_name"
+                      value={formData.user_name}
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -156,14 +192,14 @@ const Contact: React.FC = () => {
                   
                   {/* Email */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label htmlFor="user_email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                       Your Email
                     </label>
                     <input
                       type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
+                      id="user_email"
+                      name="user_email"
+                      value={formData.user_email}
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -211,10 +247,23 @@ const Contact: React.FC = () => {
                 {/* Submit button */}
                 <button
                   type="submit"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send className="h-4 w-4 mr-2" />
-                  Send Message
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </div>

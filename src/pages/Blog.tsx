@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, Clock, Search, Tag } from 'lucide-react';
 import { blogPostsData } from '../utils/data';
 
@@ -147,9 +148,12 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
           
           <p className="text-gray-600 dark:text-gray-400 mb-4 flex-grow">{post.excerpt}</p>
           
-          <button className="self-start text-blue-600 dark:text-blue-400 font-medium hover:underline">
+          <Link 
+            to={`/blog/${post.id}`}
+            className="self-start text-blue-600 dark:text-blue-400 font-medium hover:underline"
+          >
             Read More
-          </button>
+          </Link>
         </div>
       </div>
     </div>

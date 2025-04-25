@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronDown, Database, LineChart, GitBranch, Cpu } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import profileImage from '../assets/profile.jpg';
 
 const Home: React.FC = () => {
   const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -13,7 +15,6 @@ const Home: React.FC = () => {
         <div className="max-w-5xl mx-auto text-center">
           <div className="mb-8">
             <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-blue-100 dark:border-blue-900">
-              
               <img 
                 src={profileImage}
                 alt="Viraj Pawar" 
@@ -42,9 +43,7 @@ const Home: React.FC = () => {
               View My Work
             </button>
             <button 
-              onClick={() => {
-                window.location.hash = '#contact';
-              }}
+              onClick={() => navigate('/contact')}
               className="px-6 py-3 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 font-medium transition-colors"
             >
               Contact Me
@@ -101,9 +100,7 @@ const Home: React.FC = () => {
           
           <div className="text-center mt-12">
             <button
-              onClick={() => {
-                window.location.hash = '#projects';
-              }}
+              onClick={() => navigate('/projects')}
               className="px-6 py-3 rounded-lg border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-500 dark:hover:text-white font-medium transition-colors"
             >
               View All Projects
@@ -155,9 +152,7 @@ const Home: React.FC = () => {
             I'm currently available for freelance projects, full-time positions, and consulting opportunities.
           </p>
           <button
-            onClick={() => {
-              window.location.hash = '#contact';
-            }}
+            onClick={() => navigate('/contact')}
             className="px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
           >
             Get in Touch
