@@ -47,7 +47,7 @@ const Contact: React.FC = () => {
       setFormStatus({
         submitted: true,
         success: true,
-        message: 'Sending message... Debug info shown below.'
+        message: 'Sending message.!'
       });
 
       const result = await emailjs.sendForm(
