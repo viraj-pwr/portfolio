@@ -168,10 +168,12 @@ const Contact: React.FC = () => {
               {formStatus && (
                 <div className={`mb-6 p-4 rounded-lg ${formStatus.success ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'}`}>
                   {formStatus.message}
-                  {/* Add debug information */}
-                  <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono">
-                    <pre>{JSON.stringify({ formData, formRef: formRef.current ? 'Form data available' : 'No form data' }, null, 2)}</pre>
-                  </div>
+                  {/* Only show debug information if there's an error */}
+                  {!formStatus.success && (
+                    <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono">
+                      <pre>{JSON.stringify({ formData, formRef: formRef.current ? 'Form data available' : 'No form data' }, null, 2)}</pre>
+                    </div>
+                  )}
                 </div>
               )}
               
