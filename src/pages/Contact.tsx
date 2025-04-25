@@ -35,12 +35,17 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     
     try {
+      console.log('Form data being sent:', formData);
+      console.log('Form ref current:', formRef.current);
+      
       const result = await emailjs.sendForm(
         'service_u5bnlk4',
         'template_950o88g',
         formRef.current!,
         'zKTb0xXt7bo2UPPll'
       );
+
+      console.log('EmailJS response:', result);
 
       if (result.text === 'OK') {
         setFormStatus({
@@ -60,11 +65,19 @@ const Contact: React.FC = () => {
         throw new Error('Failed to send message');
       }
     } catch (error) {
-      console.error('Email sending error:', error);
+      console.error('Email sending error details:', {
+        error,
+        formData,
+        serviceId: 'service_u5bnlk4',
+        templateId: 'template_950o88g'
+      });
+      
       setFormStatus({
         submitted: true,
         success: false,
-        message: error instanceof Error ? error.message : 'Failed to send message. Please try again later or contact me directly via email.'
+        message: error instanceof Error 
+          ? `Error: ${error.message}` 
+          : 'Failed to send message. Please try again later or contact me directly via email.'
       });
     } finally {
       setIsSubmitting(false);
