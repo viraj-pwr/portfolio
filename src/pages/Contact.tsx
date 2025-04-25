@@ -35,9 +35,21 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      console.log('Form data being sent:', formData);
-      console.log('Form ref current:', formRef.current);
+      // Log form data to console and show on page
+      const debugInfo = {
+        formData,
+        serviceId: 'service_u5bnlk4',
+        templateId: 'template_950o88g',
+        publicKey: 'zKTb0xXt7bo2UPPll'
+      };
+      console.log('Debug Info:', debugInfo);
       
+      setFormStatus({
+        submitted: true,
+        success: true,
+        message: 'Sending message... Debug info shown below.'
+      });
+
       const result = await emailjs.sendForm(
         'service_u5bnlk4',
         'template_950o88g',
@@ -75,17 +87,10 @@ const Contact: React.FC = () => {
       setFormStatus({
         submitted: true,
         success: false,
-        message: error instanceof Error 
-          ? `Error: ${error.message}` 
-          : 'Failed to send message. Please try again later or contact me directly via email.'
+        message: `Error: ${error instanceof Error ? error.message : 'Unknown error occurred'}`
       });
     } finally {
       setIsSubmitting(false);
-      
-      // Reset form status after 5 seconds
-      setTimeout(() => {
-        setFormStatus(null);
-      }, 5000);
     }
   };
 
@@ -182,6 +187,10 @@ const Contact: React.FC = () => {
               {formStatus && (
                 <div className={`mb-6 p-4 rounded-lg ${formStatus.success ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'}`}>
                   {formStatus.message}
+                  {/* Add debug information */}
+                  <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono">
+                    <pre>{JSON.stringify({ formData, formRef: formRef.current ? 'Form data available' : 'No form data' }, null, 2)}</pre>
+                  </div>
                 </div>
               )}
               
