@@ -123,22 +123,22 @@ const Home: React.FC = () => {
             <SkillCard 
               icon={<Database className="h-8 w-8" />}
               title="Data Analysis"
-              skills={['Statistical Analysis', 'Data Visualization', 'SQL', 'Pandas', 'Tableau']}
+              skills={['Statistical Analysis', 'Data Visualization', 'SQL', 'Pandas', 'Power BI', 'Smartsheet', 'Google Sheets', 'Looker Studio']}
             />
             <SkillCard 
               icon={<LineChart className="h-8 w-8" />}
               title="Machine Learning"
-              skills={['Supervised Learning', 'Unsupervised Learning', 'Deep Learning', 'NLP', 'Computer Vision']}
+              skills={['Supervised Learning', 'Unsupervised Learning', 'Deep Learning', 'NLP', 'Convolutional Neural Networks', 'Knowledge Graphs']}
             />
             <SkillCard 
               icon={<Cpu className="h-8 w-8" />}
               title="Tools & Technologies"
-              skills={['Python', 'R', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'AWS', 'Docker']}
+              skills={['Python', 'R', 'PyTorch', 'Scikit-learn', 'Kubernetes', 'Docker', 'Google Apps Script']}
             />
             <SkillCard 
               icon={<GitBranch className="h-8 w-8" />}
               title="Software Development"
-              skills={['Git', 'CI/CD', 'RESTful APIs', 'Microservices', 'Production ML Systems']}
+              skills={['Git', 'CI/CD', 'RESTful APIs', 'Microservices', 'Production ML Systems', 'Microsoft Azure DevOps', 'MLOps', 'serverless Architecture']}
             />
           </div>
         </div>

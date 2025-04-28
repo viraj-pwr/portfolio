@@ -29,7 +29,7 @@ const About: React.FC = () => {
               </h1>
               
               <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
-                Data Scientist & Machine Learning Engineer
+                Data Scientist & Data Analyst
               </p>
               
               <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -158,7 +158,12 @@ const About: React.FC = () => {
               like Spark and Hadoop. I'm particularly interested in natural language processing and its applications in 
               improving human-computer interaction.
             </p>
-            
+            <p>
+            - Data Analysis:
+            Not everything in life is about minimizing an error function and building a fancy AI model. From my master's degree in Data Analytics and my engineering background, 
+            I have learned how to explore data, visualize them and extrapolate trends and patterns. If you believe your data is gold, you can hire me to help you mine it.
+            </p>
+
             <p>
               Outside of work, I enjoy hiking, playing chess, and contributing to open-source projects. I'm also an avid 
               blogger, sharing my knowledge about data science and machine learning through tutorials and case studies.
@@ -175,10 +180,14 @@ const About: React.FC = () => {
               title="Data Analysis & Visualization"
               skills={[
                 { name: "Statistical Analysis", level: 95 },
-                { name: "Data Cleaning & Preprocessing", level: 90 },
+                { name: "Data Cleaning & Preprocessing", level: 95 },
                 { name: "Pandas & NumPy", level: 95 },
-                { name: "Tableau", level: 85 },
-                { name: "Matplotlib & Seaborn", level: 90 }
+                { name: "Power BI", level: 90 },
+                {name: "Looker Studio", level: 90},
+                {name: "Smartsheet", level: 90},
+                { name: "Matplotlib & Seaborn", level: 90 },
+                { name: "Google Sheets", level: 90 },
+                { name: "ggplot2", level: 90 },
               ]}
             />
             
