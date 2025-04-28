@@ -1,8 +1,12 @@
 import React from 'react';
 import { Book, Briefcase, Award, Github, Linkedin, Mail } from 'lucide-react';
 import MediumIcon from '../components/icons/MediumIcon';
-import profileImage from '../assets/profile.jpg';
+import profileImage from '../assets/viraj.png';
+import { useNavigate } from 'react-router-dom';
+
 const About: React.FC = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="pt-24 pb-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,22 +117,58 @@ const About: React.FC = () => {
             title="Certifications"
             items={[
               {
-                title: "Deep Learning Specialization",
+                title: (
+                  <a 
+                    href="/src/assets/coursera.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    Deep Learning Specialization
+                  </a>
+                ),
                 subtitle: "DeepLearning.AI",
                 period: "2025"
               },
               {
-                title: "Azure Data Scientist Associate",
+                title: (
+                  <a 
+                    href="/src/assets/dp-100.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    Azure Data Scientist Associate
+                  </a>
+                ),
                 subtitle: "Microsoft",
                 period: "2020"
               },
               {
-                title: "Microsoft Technology Associate: Introduction to Programming Using Python",
+                title: (
+                  <a 
+                    href="/src/assets/python_certificate.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    Microsoft Technology Associate: Introduction to Programming Using Python
+                  </a>
+                ),
                 subtitle: "Microsoft",
                 period: "2020"
               },
               {
-                title: "Azure Fundamentals",
+                title: (
+                  <a 
+                    href="/src/assets/az-900.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    Azure Fundamentals
+                  </a>
+                ),
                 subtitle: "Microsoft",
                 period: "2020"
               }
@@ -171,59 +211,49 @@ const About: React.FC = () => {
           </div>
         </div>
 
-        {/* Skills section */}
+        {/* Skills & Expertise Section */}
         <div className="mb-16">
-          <h2 className="text-2xl font-bold mb-6">Skills & Expertise</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Skills & Expertise
+            </span>
+          </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <SkillsCategory 
-              title="Data Analysis & Visualization"
+              title="Technical Skills"
               skills={[
-                { name: "Statistical Analysis", level: 95 },
-                { name: "Data Cleaning & Preprocessing", level: 95 },
-                { name: "Pandas & NumPy", level: 95 },
-                { name: "Power BI", level: 90 },
-                {name: "Looker Studio", level: 90},
-                {name: "Smartsheet", level: 90},
-                { name: "Matplotlib & Seaborn", level: 90 },
-                { name: "Google Sheets", level: 90 },
-                { name: "ggplot2", level: 90 },
-              ]}
-            />
-            
-            <SkillsCategory 
-              title="Machine Learning"
-              skills={[
-                { name: "Supervised Learning", level: 90 },
-                { name: "Deep Learning", level: 85 },
-                { name: "Natural Language Processing", level: 85 },
-                { name: "Time Series Analysis", level: 80 },
-                { name: "Computer Vision", level: 75 }
-              ]}
-            />
-            
-            <SkillsCategory 
-              title="Programming Languages"
-              skills={[
-                { name: "Python", level: 95 },
-                { name: "R", level: 85 },
-                { name: "SQL", level: 90 },
-                { name: "JavaScript", level: 75 },
-                { name: "Java", level: 70 }
+                { name: "Python", level: 90 },
+                { name: "Machine Learning", level: 85 },
+                { name: "Data Analysis", level: 90 },
+                { name: "SQL", level: 85 },
+                { name: "Data Visualization", level: 80 },
+                { name: "Deep Learning", level: 75 }
               ]}
             />
             
             <SkillsCategory 
               title="Tools & Technologies"
               skills={[
-                { name: "TensorFlow & PyTorch", level: 85 },
-                { name: "Scikit-learn", level: 90 },
-                { name: "Git & Version Control", level: 85 },
-                { name: "Docker & Kubernetes", level: 80 },
-                { name: "AWS & Cloud Computing", level: 85 }
+                { name: "TensorFlow", level: 80 },
+                { name: "PyTorch", level: 75 },
+                { name: "Scikit-learn", level: 85 },
+                { name: "Pandas", level: 90 },
+                { name: "Tableau", level: 80 },
+                { name: "Git", level: 85 }
               ]}
             />
           </div>
+        </div>
+
+        {/* Contact Me Button */}
+        <div className="text-center">
+          <button 
+            onClick={() => navigate('/contact')}
+            className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+          >
+            Contact Me
+          </button>
         </div>
       </div>
     </div>
@@ -252,7 +282,7 @@ type AboutSectionProps = {
   icon: React.ReactNode;
   title: string;
   items: {
-    title: string;
+    title: string | React.ReactNode;
     subtitle: string;
     period: string;
   }[];

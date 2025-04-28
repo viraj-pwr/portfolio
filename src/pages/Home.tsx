@@ -14,7 +14,7 @@ const Home: React.FC = () => {
       <section className="pt-32 md:pt-36 pb-16 md:pb-24 flex flex-col items-center justify-center px-4">
         <div className="max-w-5xl mx-auto text-center">
           <div className="mb-8">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full overflow-hidden border-4 border-blue-100 dark:border-blue-900">
+            <div className="relative w-36 h-36 md:w-48 md:h-48 lg:w-56 lg:h-56 mx-auto rounded-full overflow-hidden border-4 border-blue-100 dark:border-blue-900">
               <img 
                 src={profileImage}
                 alt="Viraj Pawar" 
@@ -35,18 +35,18 @@ const Home: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
+              onClick={() => navigate('/about')}
+              className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+            >
+              About Me
+            </button>
+            <button 
               onClick={() => {
                 document.getElementById('featured-projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors"
+              className="px-6 py-3 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-gray-100 font-medium transition-colors"
             >
               View My Work
-            </button>
-            <button 
-              onClick={() => navigate('/contact')}
-              className="px-6 py-3 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 font-medium transition-colors"
-            >
-              Contact Me
             </button>
           </div>
         </div>
