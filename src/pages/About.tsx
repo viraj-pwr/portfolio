@@ -37,9 +37,7 @@ const About: React.FC = () => {
               </p>
               
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                I'm passionate about leveraging data to solve real-world problems. With expertise in machine learning, 
-                statistical analysis, and data visualization, I help organizations make data-driven decisions and 
-                build intelligent systems.
+              I’m a data scientist who knows tomatoes are fruit—but I’ll never let one ruin your fruit salad. I bridge the gap between models and management, translating complex analytics into profitable action for your business.
               </p>
               
               {/* Social links */}
@@ -182,32 +180,17 @@ const About: React.FC = () => {
           
           <div className="space-y-4 text-gray-700 dark:text-gray-300">
             <p>
-              I'm a data scientist with over 5 years of experience working with machine learning, statistical analysis, 
-              and data visualization. My journey in data science began during my undergraduate studies at UC Berkeley, 
-              where I discovered my passion for extracting meaningful insights from complex datasets.
+              From designing circuits, programming microcontrollers to building machine learning models, I've always been fascinated by the intersection of technology and data. 
+              With 10 years of experience in the data 
             </p>
             
-            <p>
-              After completing my master's degree at Stanford, I joined DataViz Solutions where I developed machine 
-              learning models for financial forecasting and customer segmentation. Currently, at TechCorp Inc., 
-              I lead a team of data scientists working on cutting-edge AI solutions for healthcare.
-            </p>
-            
-            <p>
-              My technical expertise includes Python, R, TensorFlow, PyTorch, and SQL, along with big data technologies 
-              like Spark and Hadoop. I'm particularly interested in natural language processing and its applications in 
-              improving human-computer interaction.
-            </p>
             <p>
             - Data Analysis:
-            Not everything in life is about minimizing an error function and building a fancy AI model. From my master's degree in Data Analytics and my engineering background, 
-            I have learned how to explore data, visualize them and extrapolate trends and patterns. If you believe your data is gold, you can hire me to help you mine it.
+            Not everything in life is about minimizing an error function and building a fancy machine learning model. From my master's degrees in Data Analytics, master's degrees in Artificial Intelligence and my engineering background,  I have learned how to explore data, visualize them and extrapolate trends and patterns.
+            Nothing exists as it appears and every clean dashboard is built on messy truths. That's where I come in. I don't just deliver visuals - I dig into the chaos behind them. I translate noise into narratives, detect what others overlook, and unconver the real drivers behind the data. Because inisights don't live on the surface, they hide in the nuance, the anomalies, the outliers. If you want more than pretty charts, if you want clarity, direction and data that actually drivers result - let's talk.
             </p>
 
-            <p>
-              Outside of work, I enjoy hiking, playing chess, and contributing to open-source projects. I'm also an avid 
-              blogger, sharing my knowledge about data science and machine learning through tutorials and case studies.
-            </p>
+ 
           </div>
         </div>
 
